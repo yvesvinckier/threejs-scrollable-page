@@ -31,6 +31,7 @@ async function setupViewer() {
   const camera = viewer.scene.activeCamera;
   const position = camera.position;
   const target = camera.target;
+  const exitButton = document.querySelector(".button--exit") as HTMLElement;
 
   // Add plugins individually.
   await viewer.addPlugin(GBufferPlugin);
@@ -77,7 +78,7 @@ async function setupViewer() {
           trigger: ".second",
           start: "top bottom",
           end: "top top",
-          scrub: true,
+          scrub: 1,
           immediateRender: false,
         },
       })
@@ -137,6 +138,83 @@ async function setupViewer() {
       camera.positionTargetUpdated(true);
       needsUpdate = false;
     }
+  });
+
+  // KNOW MORE EVENT
+  document.querySelector(".button--hero")?.addEventListener("click", () => {
+    const element = document.querySelector(".second");
+    window.scrollTo({
+      top: element?.getBoundingClientRect().top,
+      left: 0,
+      behavior: "smooth",
+    });
+  });
+
+  // SCROLL TO TOP
+  document.querySelectorAll(".button--footer")?.forEach((item) => {
+    item.addEventListener("click", () => {
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    });
+  });
+
+  // CUSTOMIZE
+  const sections = document.querySelector(".container") as HTMLElement;
+  const webgiCanvasContainer = document.getElementById(
+    "webgi-canvas-container"
+  ) as HTMLElement;
+  document
+    .querySelector(".button--customize")
+    ?.addEventListener("click", () => {
+      sections.style.visibility = "hidden";
+      webgiCanvasContainer.style.pointerEvents = "all";
+      document.body.style.cursor = "grab";
+      gsap.to(position, {
+        x: -1.95,
+        y: 1.54,
+        z: 2.29,
+        duration: 2,
+        ease: "power3.inOut",
+        onUpdate,
+      });
+      gsap.to(target, {
+        x: 0,
+        y: 0,
+        z: 0,
+        duration: 2,
+        ease: "power3.inOut",
+        onUpdate,
+        onComplete: enableControlers,
+      });
+    });
+
+  function enableControlers() {
+    exitButton.style.visibility = "visible";
+    viewer.scene.activeCamera.setCameraOptions({ controlsEnabled: true });
+  }
+
+  // EXIT CUSTOMIZE
+  exitButton.addEventListener("click", () => {
+    gsap.to(position, {
+      x: -3.0,
+      y: 0.0,
+      z: 0.0,
+      duration: 1,
+      ease: "power3.inOut",
+      onUpdate,
+    });
+    gsap.to(target, {
+      x: 0,
+      y: 0,
+      z: 0,
+      duration: 1,
+      ease: "power3.inOut",
+      onUpdate,
+    });
+    viewer.scene.activeCamera.setCameraOptions({ controlsEnabled: false });
+    sections.style.visibility = "visible";
+    webgiCanvasContainer.style.pointerEvents = "none";
+    document.body.style.cursor = "default";
+    exitButton.style.visibility = "hidden";
   });
 }
 
