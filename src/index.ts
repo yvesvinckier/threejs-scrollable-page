@@ -23,7 +23,7 @@ async function setupViewer() {
   // Initialize the viewer
   const viewer = new ViewerApp({
     canvas: document.getElementById("webgi-canvas") as HTMLCanvasElement,
-    isAntialiased: true,
+    // isAntialiased: true,
   });
 
   // Add some plugins
@@ -35,6 +35,7 @@ async function setupViewer() {
   // Add plugins individually.
   await viewer.addPlugin(GBufferPlugin);
   await viewer.addPlugin(new ProgressivePlugin(32));
+  // await viewer.addPlugin(new TonemapPlugin(true));
   await viewer.addPlugin(new TonemapPlugin(!viewer.useRgbm));
   await viewer.addPlugin(GammaCorrectionPlugin);
   await viewer.addPlugin(SSRPlugin);
@@ -45,6 +46,12 @@ async function setupViewer() {
   viewer.renderer.refreshPipeline();
 
   await manager.addFromPath("./assets/scene.glb");
+
+  // viewer.getPlugin(TonemapPlugin)!.config!.clipBackground = true; // in case its set to false in the glb
+
+  viewer.scene.activeCamera.setCameraOptions({ controlsEnabled: false });
+
+  onUpdate();
 
   function setupScrollanimation() {
     const tl = gsap.timeline();
@@ -58,7 +65,7 @@ async function setupViewer() {
         trigger: ".second",
         start: "top bottom",
         end: "top top",
-        scrub: 3,
+        scrub: true,
         immediateRender: false,
       },
       onUpdate,
@@ -70,7 +77,7 @@ async function setupViewer() {
           trigger: ".second",
           start: "top bottom",
           end: "top top",
-          scrub: 3,
+          scrub: true,
           immediateRender: false,
         },
       })
@@ -82,7 +89,7 @@ async function setupViewer() {
           trigger: ".second",
           start: "top bottom",
           end: "top top",
-          scrub: 3,
+          scrub: true,
           immediateRender: false,
         },
       })
@@ -96,7 +103,7 @@ async function setupViewer() {
           trigger: ".third",
           start: "top bottom",
           end: "top top",
-          scrub: 3,
+          scrub: true,
           immediateRender: false,
         },
         onUpdate,
@@ -109,7 +116,7 @@ async function setupViewer() {
           trigger: ".third",
           start: "top bottom",
           end: "top top",
-          scrub: 3,
+          scrub: true,
           immediateRender: false,
         },
       });
@@ -127,8 +134,7 @@ async function setupViewer() {
 
   viewer.addEventListener("preFrame", () => {
     if (needsUpdate) {
-      camera.positionUpdated(true);
-      camera.targetUpdated(true);
+      camera.positionTargetUpdated(true);
       needsUpdate = false;
     }
   });
