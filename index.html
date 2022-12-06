@@ -3,6 +3,7 @@
   <head>
     <title>Threejs scrollable page</title>
     <meta charset="UTF-8" />
+    <meta name="robots" content="noindex" />
     <meta
       name="viewport"
       content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
@@ -11,6 +12,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100;200;300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
   </head>
@@ -24,11 +29,11 @@
     <div class="container">
       <section class="section first">
         <div class="section--one--container">
-          <h1>Small armchair</h1>
+          <h1>Doris Armchair</h1>
           <p>
-            Variable speed for ultimate fingertip control for all drilling
-            applications. Reverse brush system for full torque and power in
-            forward and reverse, lock-on button for continuous use.
+            Before they sold out salvia aesthetic, hexagon disrupt sustainable
+            vaporware crucifix succulents kale chips. Selvage knausgaard
+            scenester.
           </p>
           <button class="button--hero">KNOW MORE</button>
         </div>
@@ -36,23 +41,22 @@
 
       <section class="section second">
         <div class="section--two--container">
-          <h2>designed by GamFratesi</h2>
+          <h2>Smooth design</h2>
           <p>
-            Ergonomic reversible hammer drill design with optimal grip
-            positions, light weight and insulated shock proof plastic body, easy
-            to change bits
+            Humblebrag pickled listicle yes plz williamsburg shoreditch tumblr,
+            put a bird on it cred knausgaard snackwave scenester. Before they
+            sold out salvia aesthetic.
           </p>
         </div>
       </section>
 
       <section class="section third">
         <div class="section--third--container">
-          <h2>softness of the upholstery</h2>
+          <h2>Softness of the upholstery</h2>
           <p>
-            Supports wood and metal drilling. Metal drill bits are not part of
-            the included components with the product. Metal drill bits can be
-            procured by the customer and can be used for drilling into metal
-            surfaces
+            Humblebrag pickled listicle yes plz williamsburg shoreditch tumblr,
+            put a bird on it cred knausgaard snackwave scenester. Before they
+            sold out salvia aesthetic.
           </p>
           <button class="button--customize">CUSTOMIZE</button>
         </div>
@@ -60,12 +64,28 @@
 
       <footer>
         <button class="button--footer">BACK TO TOP</button>
+        <p class="credit">
+          Armachair creator :
+          <a href="https://skfb.ly/6CnvG">Doris Armchair, Shetland Pink</a> by
+          MADE.COM is licensed under
+          <a href="http://creativecommons.org/licenses/by-nc/4.0/"
+            >Creative Commons Attribution-NonCommercial</a
+          >
+        </p>
       </footer>
     </div>
 
     <div id="webgi-canvas-container">
       <canvas id="webgi-canvas"></canvas>
       <button class="button--customize button--exit">EXIT</button>
+    </div>
+
+    <div class="customizer--container">
+      <ul class="strap--colors">
+        <li class="button--colors green"></li>
+        <li class="button--colors red"></li>
+        <li class="button--colors violet"></li>
+      </ul>
     </div>
 
     <script src="src/index.ts"></script>

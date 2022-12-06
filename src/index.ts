@@ -8,7 +8,8 @@ import {
   SSAOPlugin,
   BloomPlugin,
   GammaCorrectionPlugin,
-
+  MeshBasicMaterial2,
+  Color,
   // Color, // Import THREE.js internals
   // Texture, // Import THREE.js internals
 } from "webgi";
@@ -32,6 +33,9 @@ async function setupViewer() {
   const position = camera.position;
   const target = camera.target;
   const exitButton = document.querySelector(".button--exit") as HTMLElement;
+  const customizerInterface = document.querySelector(
+    ".customizer--container"
+  ) as HTMLElement;
 
   // Add plugins individually.
   await viewer.addPlugin(GBufferPlugin);
@@ -47,6 +51,10 @@ async function setupViewer() {
   viewer.renderer.refreshPipeline();
 
   await manager.addFromPath("./assets/scene.glb");
+
+  const drillMaterial = manager.materials!.findMaterialsByName(
+    "FABRIC"
+  )[0] as MeshBasicMaterial2;
 
   // viewer.getPlugin(TonemapPlugin)!.config!.clipBackground = true; // in case its set to false in the glb
 
@@ -189,6 +197,7 @@ async function setupViewer() {
 
   function enableControlers() {
     exitButton.style.visibility = "visible";
+    customizerInterface.style.visibility = "visible";
     viewer.scene.activeCamera.setCameraOptions({ controlsEnabled: true });
   }
 
@@ -215,7 +224,31 @@ async function setupViewer() {
     webgiCanvasContainer.style.pointerEvents = "none";
     document.body.style.cursor = "default";
     exitButton.style.visibility = "hidden";
+    customizerInterface.style.visibility = "hidden";
   });
+
+  document
+    .querySelector(".button--colors.violet")
+    ?.addEventListener("click", () => {
+      changeColor(new Color(0xaa83aa).convertSRGBToLinear());
+    });
+
+  document
+    .querySelector(".button--colors.red")
+    ?.addEventListener("click", () => {
+      changeColor(new Color(0xa57d7d).convertSRGBToLinear());
+    });
+
+  document
+    .querySelector(".button--colors.green")
+    ?.addEventListener("click", () => {
+      changeColor(new Color(0x96b2a1).convertSRGBToLinear());
+    });
+
+  function changeColor(_colorToBeChanged: Color) {
+    drillMaterial.color = _colorToBeChanged;
+    viewer.scene.setDirty();
+  }
 }
 
 setupViewer();

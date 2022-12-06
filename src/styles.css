@@ -10,6 +10,7 @@ body {
   position: absolute;
   display: flex;
   align-content: space-between;
+  align-items: center;
   width: 100%;
   justify-content: space-between;
   margin-top: 30px;
@@ -18,6 +19,7 @@ body {
 
 .logo {
   margin-left: 40px;
+  height: 80px;
 }
 
 .section {
@@ -37,7 +39,7 @@ body {
 }
 
 .first h1 {
-  font-size: 10rem;
+  font-size: 8rem;
   line-height: 8rem;
   letter-spacing: -0.3rem;
   margin: 0 0 30px -10px;
@@ -45,9 +47,10 @@ body {
 }
 
 .first p {
-  max-width: 940px;
+  max-width: 920px;
   margin: 0 auto;
   text-align: center;
+  font-family: "Roboto Mono", monospace;
 }
 
 .button--hero {
@@ -90,6 +93,10 @@ body {
   padding: 10px 30px;
   margin-right: 40px;
   font-size: 0.6rem;
+  height: 42px;
+}
+svg {
+  fill: #ffffff;
 }
 
 .second {
@@ -101,6 +108,10 @@ body {
   width: 360px;
   margin-right: 10%;
   z-index: 1;
+}
+
+p {
+  font-family: "Roboto Mono", monospace;
 }
 
 .section--third--container {
@@ -119,9 +130,15 @@ footer {
   background: black;
   padding: 70px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   position: relative;
   z-index: 1;
+}
+footer p {
+  padding-top: 40px;
+  text-align: center;
 }
 
 .button--footer {
@@ -132,12 +149,6 @@ footer {
   padding: 10px 30px;
   font-size: 0.6rem;
   cursor: pointer;
-  transition: all 0.8s ease;
-}
-
-.button--footer:hover {
-  background: black;
-  color: white;
 }
 
 #webgi-canvas {
@@ -181,7 +192,6 @@ footer {
   width: 30px;
   height: 30px;
   border-radius: 50px;
-  border: 1px solid white;
   padding: 0;
   margin-bottom: 10px;
   cursor: pointer;
@@ -189,18 +199,30 @@ footer {
 }
 
 .button--colors:hover {
-  filter: drop-shadow(0 0 0.75rem rgba(28, 17, 52, 0.704));
-  transform: scale(1.5);
+  filter: drop-shadow(0 0 0.4rem rgba(79, 79, 79, 0.704));
+  transform: scale(1.1);
 }
 
-.yellow {
-  background-color: #f0d56c;
+.green {
+  background-color: rgb(150, 178, 161);
 }
+/* 0x96b2a1 */
 
 .red {
-  background-color: rgb(231, 34, 34);
+  background-color: rgb(165, 125, 125);
+}
+/* 0xa57d7d */
+
+.violet {
+  background-color: rgb(170, 131, 170);
+}
+/* 0xaa83aa */
+
+.credit {
+  color: #ffffff;
+  font-size: 0.6rem;
 }
 
-.black {
-  background-color: rgb(74, 76, 79);
+.credit a {
+  color: #ffffff;
 }
